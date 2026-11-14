@@ -41,11 +41,12 @@ class ProjectTests(unittest.TestCase):
                 TestRepository(file.name)
 
     def test_pypi_metadata(self):
-        data = {'info': {'requires_dist': ['Foo_Bar>=2; extra == "dev"']}}
+        requirements = ['Foo_Bar>=2', 'Dev; extra == "dev"']
+        data = {'info': {'requires_dist': requirements}}
         response = io.BytesIO(json.dumps(data).encode())
         with patch('repository.urlopen', return_value=response):
-            self.assertEqual(PyPIRepository('https://pypi.org').dependencies('x'),
-                             ['foo-bar'])
+            repo = PyPIRepository('https://pypi.org')
+            self.assertEqual(repo.dependencies('x'), ['foo-bar'])
 
 
 if __name__ == '__main__':
