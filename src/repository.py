@@ -54,6 +54,8 @@ class PyPIRepository:
         requirements = data.get('info', {}).get('requires_dist') or []
         names = []
         for requirement in requirements:
+            if re.search(r'\bextra\s*==', requirement):
+                continue
             match = NAME.match(requirement)
             if not match:
                 raise ValueError(f'invalid requirement: {requirement}')

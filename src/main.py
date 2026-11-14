@@ -15,12 +15,17 @@ def arguments():
     """Parse and validate command-line options."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('package', help='Package name (uppercase in test mode)')
-    parser.add_argument('--repository', required=True, help='PyPI URL or JSON file')
+    parser.add_argument('--repository', required=True,
+                        help='PyPI URL or JSON file')
     parser.add_argument('--test', action='store_true', help='Use a test graph')
-    parser.add_argument('--ascii', action='store_true', help='Print ASCII tree')
-    parser.add_argument('--reverse', metavar='PACKAGE', help='Reverse dependencies')
-    parser.add_argument('--image', action='store_true', help='Open SVG via D2')
-    parser.add_argument('--direct', action='store_true', help='Direct dependencies')
+    parser.add_argument('--ascii', action='store_true',
+                        help='Print ASCII tree')
+    parser.add_argument('--reverse', metavar='PACKAGE',
+                        help='Reverse dependencies')
+    parser.add_argument('--image', action='store_true',
+                        help='Open SVG via D2')
+    parser.add_argument('--direct', action='store_true',
+                        help='Direct dependencies')
     args = parser.parse_args()
     if args.test:
         if not Path(args.repository).is_file():
