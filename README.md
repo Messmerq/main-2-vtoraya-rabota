@@ -11,10 +11,10 @@
 Из корня репозитория:
 
 ```sh
-sh run.sh A --repository examples/graph.json --test --ascii
-sh run.sh A --repository examples/graph.json --test
-sh run.sh A --repository examples/graph.json --test --reverse D
-sh run.sh requests --repository https://pypi.org --direct
+./run.sh A --repository examples/graph.json --test --ascii
+./run.sh A --repository examples/graph.json --test
+./run.sh A --repository examples/graph.json --test --reverse D
+./run.sh requests --repository https://pypi.org --direct
 python3 -m unittest discover -s tests -v
 ```
 
@@ -32,15 +32,15 @@ URL PyPI-совместимого JSON API или путь к JSON-файлу; `
 вершина E. Повторные вершины в дереве помечаются `(already shown)`.
 
 ```sh
-sh run.sh B --repository examples/graph.json --test --ascii
-sh run.sh C --repository examples/graph.json --test --ascii
-sh run.sh E --repository examples/graph.json --test --ascii
+./run.sh B --repository examples/graph.json --test --ascii
+./run.sh C --repository examples/graph.json --test --ascii
+./run.sh E --repository examples/graph.json --test --ascii
 ```
 
 Для получения изображения установите отдельно [D2](https://d2lang.com/), затем:
 
 ```sh
-sh run.sh A --repository examples/graph.json --test > graph.d2
+./run.sh A --repository examples/graph.json --test > graph.d2
 d2 graph.d2 graph.svg
 ```
 
@@ -49,9 +49,10 @@ d2 graph.d2 graph.svg
 ## Интерпретация и ограничения
 
 PyPI API сообщает `requires_dist` последней версии. Программа включает все
-имена из метаданных, в том числе зависимости с маркерами платформы и extras;
-ограничения версий и маркеры не вычисляются. Поэтому граф потенциальных
-зависимостей может отличаться от результата `pip install` / `pip inspect`,
+имена из метаданных, кроме записей с условием `extra == ...`; условия
+платформы и ограничения версий не вычисляются. Сложные выражения с
+`extra == ...` исключаются целиком, поэтому результат может быть неполным.
+Граф потенциальных зависимостей может отличаться от результата `pip install` / `pip inspect`,
 которые учитывают среду, выбранные extras и совместимые версии. Для сравнения
 можно установить пакет в отдельное виртуальное окружение и изучить вывод
 `python -m pip inspect`; это сравнение не является частью работы программы.
@@ -59,3 +60,5 @@ PyPI API сообщает `requires_dist` последней версии. Пр�
 Большие реальные графы требуют много запросов и могут превысить лимит
 рекурсии Python. Ошибка загрузки прерывает построение, не скрывая отсутствие
 метаданных.
+
+Результаты запуска D2 и сравнения с pip приведены в [отчёте](examples/comparison.md).
