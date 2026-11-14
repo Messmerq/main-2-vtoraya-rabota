@@ -11,10 +11,10 @@
 Из корня репозитория:
 
 ```sh
-./run.sh A --repository examples/graph.json --test --ascii
-./run.sh A --repository examples/graph.json --test
-./run.sh A --repository examples/graph.json --test --reverse D
-./run.sh requests --repository https://pypi.org --direct
+sh run.sh A --repository examples/graph.json --test --ascii
+sh run.sh A --repository examples/graph.json --test
+sh run.sh A --repository examples/graph.json --test --reverse D
+sh run.sh requests --repository https://pypi.org --direct
 python3 -m unittest discover -s tests -v
 ```
 
@@ -32,15 +32,15 @@ URL PyPI-совместимого JSON API или путь к JSON-файлу; `
 вершина E. Повторные вершины в дереве помечаются `(already shown)`.
 
 ```sh
-./run.sh B --repository examples/graph.json --test --ascii
-./run.sh C --repository examples/graph.json --test --ascii
-./run.sh E --repository examples/graph.json --test --ascii
+sh run.sh B --repository examples/graph.json --test --ascii
+sh run.sh C --repository examples/graph.json --test --ascii
+sh run.sh E --repository examples/graph.json --test --ascii
 ```
 
 Для получения изображения установите отдельно [D2](https://d2lang.com/), затем:
 
 ```sh
-./run.sh A --repository examples/graph.json --test > graph.d2
+sh run.sh A --repository examples/graph.json --test > graph.d2
 d2 graph.d2 graph.svg
 ```
 
